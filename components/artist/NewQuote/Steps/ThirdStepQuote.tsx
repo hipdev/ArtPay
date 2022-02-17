@@ -37,7 +37,7 @@ const ThirdStepQuote = ({ register }: StepProps) => {
             <AiOutlineLock className="text-primary" />
           </span>
         </p>
-        <p>When the work is approved. You'll be instantly paid.</p>
+        <p>When the work is approved. You&apos;ll be instantly paid.</p>
       </div>
       <div className="h-20" />
 
@@ -61,15 +61,15 @@ const ThirdStepQuote = ({ register }: StepProps) => {
       </div>
 
       <div className="flex justify-between mt-2 mb-5">
-        <p className="text-black">You'll receive in your wallet:</p>
+        <p className="text-black">You&apos;ll receive in your wallet:</p>
         <p className="font-bold">2,322.50</p>
       </div>
 
       <div className="bg-white shadow-sm py-2 px-3 mb-5">
         <p className="text-black">✨The delivered NFT will be minted on NEAR</p>
         <p className="tracking-tight">
-          Your customer can transfer to another network. We’ll charge the extra
-          gas fees directly.
+          Your customer can transfer to another network. We&apos;ll charge the
+          extra gas fees directly.
         </p>
       </div>
 

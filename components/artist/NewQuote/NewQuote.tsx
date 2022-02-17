@@ -4,6 +4,7 @@ import FirstStepQuote from './Steps/FirstStepQuote'
 import FourStepQuote from './Steps/FourStep'
 import SecondStepQuote from './Steps/SecondStepQuote'
 import ThirdStepQuote from './Steps/ThirdStepQuote'
+import ShareStep from './Steps/ShareStep'
 
 const NewQuote = () => {
   const {
@@ -32,7 +33,7 @@ const NewQuote = () => {
             watch={watch}
           />
           <ThirdStepQuote register={register} trigger={trigger} />
-          <FourStepQuote register={register} trigger={trigger} />
+          <ShareStep register={register} trigger={trigger} />
         </Wizard>
       </form>
     </section>

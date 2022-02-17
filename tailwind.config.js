@@ -18,6 +18,10 @@ module.exports = {
         '90vh': '90vh',
       },
     },
+    fontFamily: {
+      display: ['Inter', 'ui-sans-serif', 'system-ui', 'Segoe UI'],
+      body: ['Inter', 'ui-sans-serif', 'system-ui', 'Segoe UI'],
+    },
   },
   plugins: [],
 }

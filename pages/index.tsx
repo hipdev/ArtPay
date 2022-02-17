@@ -19,7 +19,7 @@ export default function Home() {
         </div>
 
         <div className="mb-4">
-          <p>I've got a code</p>
+          <p>I&apos;ve got a code</p>
           <input
             type="number"
             maxLength={4}
@@ -42,7 +42,9 @@ export default function Home() {
             />
             Connect
           </button>
-          <p>Your NEAR wallet will open or you’ll be prompted to create one.</p>
+          <p>
+            Your NEAR wallet will open or you&apos;ll be prompted to create one.
+          </p>
         </div>
       </section>
     </main>

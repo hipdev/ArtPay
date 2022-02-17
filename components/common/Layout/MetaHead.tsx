@@ -9,7 +9,7 @@ const MetaHead = ({ title }: Props) => {
   return (
     <>
       <Head>
-        <title>{title || 'Art pay Demo'}</title>
+        <title>{title || 'ArtPay Demo'}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
     </>
