@@ -20,7 +20,7 @@ const ReviewUpdate = () => {
       legalAssignment: 1,
     },
   })
-  const pageId = 1 //this.props.id passed in param
+  const pageId = 0; //this.props.id passed in param
   const onSubmit = (data) => console.log(data)
 
   return (

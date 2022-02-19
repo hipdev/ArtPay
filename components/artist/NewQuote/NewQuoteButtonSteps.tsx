@@ -7,6 +7,7 @@ const NewQuoteButtonSteps = ({
   trigger: UseFormTrigger<FieldValues>
 }) => {
   const { activeStep, previousStep, nextStep } = useWizard()
+
   return (
     <div className="flex justify-end gap-4 pb-10">
       <button
@@ -22,18 +23,24 @@ const NewQuoteButtonSteps = ({
       >
         Cancel
       </button>
+
       <button
+        type="submit"
         onClick={async () => {
           const isValid = await trigger()
 
           if (isValid) {
-            nextStep()
+            
+            nextStep();
+            return isValid;
+  //TODO: submit not getting called? so how do we store the form state?
           }
         }}
         className="px-3 rounded-sm py-1 bg-primary text-white font-medium"
       >
         Next Step
       </button>
+
     </div>
   )
 }

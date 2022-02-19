@@ -63,15 +63,19 @@ const DashboardArtist = () => {
             </p>
           </div>
           <div className="flex gap-2 text-lg">
-            <button className="border border-gray-300 shadow-sm py-2 px-2 rounded-sm">
-              <BsFillPencilFill className="" />
-            </button>
+            <Link href="/update-job/draft">
+              <button className="border border-gray-300 shadow-sm py-2 px-2 rounded-sm">
+                  <BsFillPencilFill className="" />
+              </button>
+            </Link>
             <button className="border border-gray-300 shadow-sm py-2 px-2 rounded-sm">
               <BsFillChatFill className="" />
             </button>
-            <button className="border border-gray-300 shadow-sm py-2 px-2 rounded-sm">
-              <BsCheck2 className="" />
-            </button>
+            <Link href="/update-job/final">
+              <button className="border border-gray-300 shadow-sm py-2 px-2 rounded-sm">
+                <BsCheck2 className="" />
+              </button>
+            </Link>
           </div>
         </div>
       </div>

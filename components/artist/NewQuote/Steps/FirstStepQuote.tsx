@@ -2,8 +2,11 @@ import { HiOutlineSelector } from 'react-icons/hi'
 import NewQuoteButtonSteps from '../NewQuoteButtonSteps'
 import { StepProps } from '../NewQuoteTypes'
 import QuoteSteps from '../NewQuoteNumberSteps'
+import { useAppContext } from '../../../../context/state'
+import { useForm } from 'react-hook-form'
 
 const FirstStepQuote = ({ register, trigger }: StepProps) => {
+
   return (
     <div>
       <QuoteSteps />
@@ -13,7 +16,7 @@ const FirstStepQuote = ({ register, trigger }: StepProps) => {
       <label className="flex flex-col mb-5">
         <span className="font-medium mb-2">Project Title</span>
         <input
-          {...register('projectName', { required: true })}
+          {...register('title', { required: true })}
           type="text"
           className="shadow-sm shadow-gray-300 border-gray-100 px-4 py-2 rounded-sm"
         />
@@ -23,7 +26,7 @@ const FirstStepQuote = ({ register, trigger }: StepProps) => {
         <span className="font-medium mb-2">Type</span>
         <div className="relative w-full">
           <select
-            {...register('projectType', { required: true })}
+            {...register('job_type', { required: true })}
             className="shadow-sm shadow-gray-300 border-gray-100 px-4 py-2 rounded-sm bg-white w-full"
           >
             <option value="one">Custom Artwork</option>
@@ -37,7 +40,7 @@ const FirstStepQuote = ({ register, trigger }: StepProps) => {
       <label className="flex flex-col mb-5">
         <span className="font-medium mb-2">Description</span>
         <textarea
-          {...register('projectDescription', { required: true })}
+          {...register('description', { required: true })}
           rows={3}
           className="shadow-sm shadow-gray-300 border-gray-100 px-4 py-2 rounded-sm"
         ></textarea>

@@ -3,6 +3,7 @@ import { StepProps } from '../NewUpdateTypes'
 import UpdateSteps from '../NewUpdateNumberSteps'
 import { useState } from 'react'
 import { StyledSwitch, StyledThumb } from './UpdateStyles'
+import ProjectRequirements from '../../../ProjectRequirements'
 
 // Exports
 const Switch = StyledSwitch
@@ -36,7 +37,11 @@ const ReceiveQuote = ({ register, trigger }: StepProps) => {
       </label>
 
       <label className="flex flex-col mb-5">
-        <div className="flex justify-between px-5 py-2 deliveryBox"></div>
+        <div className="flex justify-between px-0 py-2 deliveryBox">
+
+        <ProjectRequirements/>
+
+        </div>
       </label>
 
       <label className="flex flex-col mb-5">

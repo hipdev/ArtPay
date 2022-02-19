@@ -43,7 +43,7 @@ const ThirdStepQuote = ({ register }: StepProps) => {
 
       <div className="mb-5 px-8">
         <div className="flex justify-between mb-1">
-          <p className="font-medium">Gass fees</p>
+          <p className="font-medium">Gas fees</p>
           <p>2.50</p>
         </div>
         <div className="flex justify-between mb-1">
