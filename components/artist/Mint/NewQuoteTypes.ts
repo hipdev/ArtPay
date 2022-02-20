@@ -9,6 +9,4 @@ export type StepProps = {
   register: UseFormRegister<any>
   trigger: UseFormTrigger<any>
   watch?: UseFormWatch<any>
-  job,
-  control?
 }

@@ -16,35 +16,15 @@ const ThirdStepQuote = ({ register }: StepProps) => {
     <div>
       <QuoteSteps />
       <h3 className="text-xl font-medium mb-5">Price & costs</h3>
-
-      <div className="relative flex justify-end">
-        <select className="w-7/12 shadow-sm shadow-gray-300 border-gray-100 px-4 py-2 rounded-sm bg-white">
-          <option value="NEAR">NEAR</option>
-          <option value="ETH">ETH</option>
-          <option value="USDT">USDT</option>
-        </select>
-        <HiOutlineSelector className="absolute right-2 bottom-2 text-2xl" />
-      </div>
-
+      
       <label className="flex flex-col mb-5">
-        <span className="font-medium mb-2">Contractor</span>
+        <span className="font-medium mb-2">Contractor (Optional)</span>
         <input
           {...register('contractor', { required: true })}
           type="text"
           onChange={e => setContractor(e.target.value)}
           className="shadow-sm shadow-gray-300 border-gray-100 px-4 py-2 rounded-sm"
         />
-      </label>
-      
-
-      <label className="flex items-center justify-between mb-5 gap-2 mt-3">
-        <span className="font-medium mb-2 whitespace-pre">Customer price</span>
-        <div className="relative w-5/12">
-          <input
-            className="shadow-sm shadow-gray-300 border-gray-100 px-4 py-2 rounded-sm bg-white w-full text-right"
-            placeholder="2.500"
-          />
-        </div>
       </label>
 
       <div className="text-right text-sm gradientBlue absolute left-0 w-full py-2 px-4 ">
@@ -61,25 +41,12 @@ const ThirdStepQuote = ({ register }: StepProps) => {
       <div className="mb-5 px-8">
         <div className="flex justify-between mb-1">
           <p className="font-medium">Gas fees</p>
-          <p>2.50</p>
-        </div>
-        <div className="flex justify-between mb-1">
-          <p className="font-medium">Our fee</p>
-          <p>50.00</p>
-        </div>
-        <div className="flex justify-between">
-          <p className="font-medium">Royalties</p>
-          <p>50.00</p>
+          <p>0.01</p>
         </div>
         <div className="flex justify-end">
           <div className="w-6/12 h-px bg-darky my-1" />
         </div>
-        <p className="text-right">-177.50</p>
-      </div>
-
-      <div className="flex justify-between mt-2 mb-5">
-        <p className="text-black">You&apos;ll receive in your wallet:</p>
-        <p className="font-bold">2,322.50</p>
+        <p className="text-right">0.01</p>
       </div>
 
       <div className="bg-white shadow-sm py-2 px-3 mb-5">

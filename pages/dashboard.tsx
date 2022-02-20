@@ -6,10 +6,7 @@ import { useState, useEffect } from 'react'
 
 
 export default function Home() {
-
-  
   const [isClient, setIsClient] = useState(false);
-
 
   const handleStatusChange = (status) => {
     setIsClient(status);

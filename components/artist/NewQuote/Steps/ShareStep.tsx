@@ -5,7 +5,9 @@ import QuoteSteps from '../NewQuoteNumberSteps'
 import ShareLink from '../ShareLink'
 import ProjectRequirements from '../../../ProjectRequirements'
 
-const ShareStep = ({ register, trigger }: StepProps) => {
+const ShareStep = ({ register, trigger, job }: StepProps) => {
+
+
 
   return (
     <div>
@@ -29,7 +31,7 @@ const ShareStep = ({ register, trigger }: StepProps) => {
       <label className="flex flex-col mb-5">
         <div className="flex justify-between px-5 py-2 deliveryBox">
 
-        <ProjectRequirements/>
+        <ProjectRequirements job={job}/>
 
         </div>
       </label>
@@ -37,7 +39,7 @@ const ShareStep = ({ register, trigger }: StepProps) => {
       <div className="mb-5">
         <p>Share the quote with your client </p>
         <div>
-          <ShareLink />
+          <ShareLink job={job} />
         </div>
       </div>
 
@@ -50,7 +52,7 @@ const ShareStep = ({ register, trigger }: StepProps) => {
         </button>
 
         <button type="submit" className="px-3 rounded-sm py-1 bg-primary text-white font-medium">
-          Done
+          Mint!
         </button>
       </div>
     </div>

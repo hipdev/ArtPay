@@ -7,54 +7,27 @@ import { StepProps } from '../NewQuoteTypes'
 import QuoteSteps from '../NewQuoteNumberSteps'
 import { useState } from 'react'
 import { StyledSwitch, StyledThumb } from './SecondStepQuoteStyles'
-import { useFieldArray } from "react-hook-form";
-
 import { useAppContext } from '../../../../context/state'
-import Link from 'next/link'
 
 // Exports
 const Switch = StyledSwitch
 const SwitchThumb = StyledThumb
 
-const party = {
-  attrParty: '',
-  royalty: '',
-  attPartyAddress: ''
-}
-
-type FormValues = {
-  Job_party: {
-    attrParty: string;
-    royalty: string;
-    attPartyAddress: string;
-  }[];
-};
-
-
-const SecondStepQuote = ({ register, trigger, watch, control }: StepProps) => {
+const SecondStepQuote = ({ register, trigger, watch }: StepProps) => {
   const sessionState = useAppContext();
 
   const watchLegal = watch('legalAssignment')
   const [isDerivateWork, setIsDerivateWork] = useState(false)
 
-  const { fields, append, remove } = useFieldArray({
-    control, // control props comes from useForm (optional: if you are using FormContext)
-    name: "Job_party", // unique name for your Field Array
-  });
-
   const handleSwitch = (value) => {
     setIsDerivateWork(value)
   }
 
-  const handelAddParty = () => {
-    append({ ...party })
+  const setCopyright = val => sessionState.newNFT.copyright = val;
+  const setRightAssign = val => {
+    sessionState.newNFT.rightAssign = val.split('-').join('').toUpperCase();
   }
 
-  const handelRemove = (index) => {
-    remove(index)
-  };
-
-  const setLicenceType = val => sessionState.job.lic_type = val;
 
   return (
     <div>
@@ -63,16 +36,26 @@ const SecondStepQuote = ({ register, trigger, watch, control }: StepProps) => {
       <h3 className="text-xl font-medium mb-5">Who owns the rights?</h3>
 
       <label className="flex flex-col mb-5">
+        <span className="font-medium mb-2">Copyright Statement</span>
+        <input
+          {...register('copyright', { required: true })}
+          type="text"
+          onChange={e => setCopyright(e.target.value)}
+          placeholder="Copyright © 2022 ArtPay all rights reserved. See URL for more information."
+          className="shadow-sm shadow-gray-300 border-gray-100 px-4 py-2 rounded-sm"
+        />
+      </label>
+
+      <label className="flex flex-col mb-5">
         <span className="font-medium mb-2">Legal assignment</span>
         <div className="relative w-full">
           <select
             {...register('legalAssignment', { required: true })}
-            defaultValue="CC0"
-            onChange={e => setLicenceType(e.target.value)}
+            onChange={e => setRightAssign(e.target.value)}
             className="shadow-sm shadow-gray-300 border-gray-100 px-4 py-2 rounded-sm bg-white w-full"
           >
             {legalData.map((item) => (
-              <option key={item.id} value={item.name}>
+              <option key={item.id} value={item.code}>
                 {item.name}
               </option>
             ))}
@@ -80,6 +63,7 @@ const SecondStepQuote = ({ register, trigger, watch, control }: StepProps) => {
           <HiOutlineSelector className="absolute right-2 bottom-2 text-2xl" />
         </div>
       </label>
+
 
       {legalData.map((item) => (
         <div
@@ -135,54 +119,31 @@ const SecondStepQuote = ({ register, trigger, watch, control }: StepProps) => {
 
       {isDerivateWork && (
         <div className="overflow-hidden mb-7">
-          {fields.map((field: any, index: number) => (
-            <div key={field.id} className="mb-2">
-              <div className="flex gap-2">
-                <input
-                  defaultValue={`${field.attrParty}`}
-                  {...register(`Job_party.${index}.attrParty` as const, { required: true })}
-                  className="w-7/12 shadow-sm shadow-gray-300 border-gray-100 px-4 py-1 rounded-sm bg-white"
-                  placeholder={`Attribute party #${index + 1}`
-                  }
-                />
-                <label className="flex items-center w-5/12 gap-2" htmlFor="royalty">
-                  <span className="whitespace-pre">% royalty</span>
-                  <input
-                    defaultValue={`${field.royalty}`}
-                    {...register(`Job_party.${index}.royalty` as const, { required: true })}
-                    className="shadow-sm shadow-gray-300 border-gray-100 px-4 py-1 rounded-sm bg-white"
-                    type="text"
-                    placeholder="none"
-                  />
-                </label>
-              </div>
-              <div className="w-full mt-2">
-                <input
-                  defaultValue={`${field.attPartyAddress}`}
-                  {...register(`Job_party.${index}.attPartyAddress` as const, { required: true })}
-                  type="text"
-                  className="shadow-sm shadow-gray-300 border-gray-100 px-4 py-1 rounded-sm bg-white w-full"
-                  placeholder={`Attribute party #${index + 1} wallet address`}
-                />
-              </div>
-              {
-                index > 0 && (
-                  <div className="w-full text-right mt-2">
-                    <button className="px-3 rounded-sm py-1 bg-red-600 text-white font-medium" type="button" onClick={() => {handelRemove(index)}}>
-                      DELETE
-                    </button>
-                  </div>
-                )
-              }
-
-            </div>
-          ))}
-
-          <div className="gap-2 m-2"> 
-            <button className="text-sm underline underline-offset-1" onClick={handelAddParty}>Add Party</button>
+          <div className="flex gap-2">
+            <input
+              {...register('attrParty', { required: true })}
+              className="w-7/12 shadow-sm shadow-gray-300 border-gray-100 px-4 py-1 rounded-sm bg-white"
+              placeholder="Attribute party #1"
+            />
+            <label className="flex items-center w-5/12 gap-2" htmlFor="royalty">
+              <span className="whitespace-pre">% royalty</span>
+              <input
+                {...register('royalty', { required: true })}
+                className="shadow-sm shadow-gray-300 border-gray-100 px-4 py-1 rounded-sm bg-white"
+                type="text"
+                placeholder="none"
+              />
+            </label>
+          </div>
+          <div className="w-full mt-2">
+            <input
+              {...register('attPartyAddress', { required: true })}
+              type="text"
+              className="shadow-sm shadow-gray-300 border-gray-100 px-4 py-1 rounded-sm bg-white w-full"
+              placeholder="Attribute party #1 wallet address"
+            />
           </div>
         </div>
-        
       )}
 
       <NewQuoteButtonSteps trigger={trigger} />

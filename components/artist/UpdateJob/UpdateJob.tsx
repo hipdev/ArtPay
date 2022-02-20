@@ -1,21 +1,65 @@
 import { HiOutlineSelector } from 'react-icons/hi'
 import { useForm } from 'react-hook-form'
 import DropAsset from './DropAsset'
-import { createContext, useContext, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import { useAppContext } from '../../../context/state'
+
+import { initNear, loadContract } from '../../../context/utils'
+
 
 //TODO: Set Modal View (no Header) with X in top right to close view. 
 
-
-const UpdateJob = (option) => {
+const UpdateJob = ( option ) => {
 
   const sessionState = useAppContext();
+  const [message, setMessage] = useState('');
+  const [checkin, setCheckin] = useState([]);
 
+  useEffect(() => {
+    /* initalise near api here and store in AppContext */ 
+    const init = async () => {
+      const { near, wallet } = await initNear();
+      sessionState.near = near;
+      sessionState.wallet = wallet;
+
+      console.log(sessionState.wallet);
+
+      if (sessionState.wallet && sessionState.wallet.isSignedIn()) {
+        const contract: any = loadContract(sessionState.near, sessionState.wallet, "escrow")
+        setCheckin(await contract.get_escrow_checkins_list({ 
+          client: sessionState.updateJob.client, 
+          contractor: sessionState.wallet.getAccountId(), 
+          id: sessionState.updateJob.id 
+          })
+        );
+      }
+    }
+
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+
+    const client = params.client;
+    const id = Number(params.id);
+
+    let validURL = true;
+    (!client) && (validURL = false);
+    (!client) && (validURL = false);
+
+    if (!validURL) { 
+      console.error("Invalid URL!!");
+    }
+    sessionState.updateJob.client = client;
+    sessionState.updateJob.id = id;
+
+    init();
+  }, []);
   let user_name = sessionState.user_name;
   let job_title = sessionState.job_title;
 
-  console.log('UserState.user_name:'+user_name);
-  console.log('UserState.job_title:'+job_title);
+  var job = sessionState.job;
+
+  //console.log('UserState.user_name:'+job.user_name);
+  console.log('UserState.job_title:'+job.title);
   console.log('Option: '+option.option);
 
   const {
@@ -32,24 +76,48 @@ const UpdateJob = (option) => {
     },
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
+
     sessionState.job_title = data.updateMessage;
+
+    const { near, wallet } = await initNear();
+    sessionState.near = near;
+    sessionState.wallet = wallet;
+
+    //TODO:DB:POST to JOB_CHECKIN table
+    setMessage(`Logging Checkin ...`);
+    const contract: any = loadContract(sessionState.near, sessionState.wallet, "escrow");
+    const checkinId = await contract.create_escrow_checkin(
+      {
+        client: sessionState.updateJob.client,
+        id: sessionState.updateJob.id,
+        update_type: data.updateType, 
+        message: data.updateMessage, 
+        media_url: "IPFS URL", // data.updateAssetURL,
+        timestamp: Date.now(), 
+      }
+    );
+    setMessage(`Checked in. See id ${checkinId}`);
+
+
+    //sessionState.job_title = data.updateMessage;
 //TODO:DB:POST to JOB_CHECKIN table
+
   }
 
-  console.log(watch("updateMessage"));
+  //console.log(watch("updateMessage"));
         
 
   return (
     <section className="px-3 mt-3 text-darky">
     <div>
     <form onSubmit={handleSubmit(onSubmit)}>
-      <h3 className="text-xl font-medium mb-5">[ProjectName: {sessionState.job_title}]</h3>
+      <h3 className="text-xl font-medium mb-5">{job.title}</h3>
 
       <label className="flex flex-col mb-5">
         <span className="font-medium mb-2">Project Requirements</span>
-        <p>Needed?</p>
+        <p>{job.description}</p>
       </label>
 
       <label className="flex flex-col mb-5">
@@ -94,6 +162,31 @@ const UpdateJob = (option) => {
             Submit update
           </button>
       </div>
+
+      {
+        checkin.length === 0 
+        ?
+        <div>Retrieving Checkins for Job ...</div>
+        :
+        checkin.map((checkin, index) => {
+          return(
+            <div key={index}>
+              <div>
+              {checkin.media_url}
+              </div>
+              <div>
+              {checkin.update_type}
+              </div>
+              <div>
+              {checkin.timestamp}
+              </div>
+            </div>
+          )
+        })
+      }
+      <div>{message}</div>
+
+      
     </form>
     </div>
     </section>

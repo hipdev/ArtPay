@@ -1,8 +1,13 @@
 import { HiOutlineSelector } from 'react-icons/hi'
 import { StepProps } from '../NewUpdateTypes'
 import UpdateSteps from '../NewUpdateNumberSteps'
+import { useAppContext } from '../../../../context/state'
 
 const FundEscrow = ({ register, trigger }: StepProps) => {
+  const sessionState = useAppContext();
+
+  const setLockedAmount = val => sessionState.job.locked_amount = val;
+  
   return (
     <div>
       <UpdateSteps />
@@ -10,7 +15,13 @@ const FundEscrow = ({ register, trigger }: StepProps) => {
       <h3 className="text-xl font-medium mb-5">Fund the Escrow</h3>
 
       <label className="flex flex-col mb-5">
-        <div className="flex justify-between px-5 py-2 deliveryBox"></div>
+        <span className="font-medium mb-2">Project Title</span>
+        <input
+          {...register('title', { required: true })}
+          type="text"
+          onChange={e => setLockedAmount(e.target.value)}
+          className="shadow-sm shadow-gray-300 border-gray-100 px-4 py-2 rounded-sm"
+        />
       </label>
 
       <h3 className="text-xl font-medium mb-5">What happens next?</h3>
