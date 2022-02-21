@@ -54,7 +54,10 @@ const SecondStepQuote = ({ register, trigger, watch, control }: StepProps) => {
     remove(index)
   };
 
-  const setLicenceType = val => sessionState.job.lic_type = val;
+  const setLicenceType = val => sessionState.job.lic_type = val.key;
+//            onChange={e => setLicenceType(e.target)}
+
+  console.log('LA+lt:'+watch('legalAssignment')+watch('lic_type'));
 
   return (
     <div>
@@ -64,15 +67,15 @@ const SecondStepQuote = ({ register, trigger, watch, control }: StepProps) => {
 
       <label className="flex flex-col mb-5">
         <span className="font-medium mb-2">Legal assignment</span>
+        <input type='hidden' value={watchLegal} {...register('lic_type')}></input>
         <div className="relative w-full">
           <select
             {...register('legalAssignment', { required: true })}
             defaultValue="CC0"
-            onChange={e => setLicenceType(e.target.value)}
             className="shadow-sm shadow-gray-300 border-gray-100 px-4 py-2 rounded-sm bg-white w-full"
           >
             {legalData.map((item) => (
-              <option key={item.id} value={item.name}>
+              <option key={item.name} value={item.code}>
                 {item.name}
               </option>
             ))}
@@ -83,8 +86,8 @@ const SecondStepQuote = ({ register, trigger, watch, control }: StepProps) => {
 
       {legalData.map((item) => (
         <div
-          className={(item.id == watchLegal ? 'block' : 'hidden') + ' mb-10'}
-          key={item.id}
+          className={(item.code == watchLegal ? 'block' : 'hidden') + ' mb-10'}
+          key={item.code}
         >
           <p className="font-bold">{item.attribution}</p>
 
@@ -169,7 +172,7 @@ const SecondStepQuote = ({ register, trigger, watch, control }: StepProps) => {
                 index > 0 && (
                   <div className="w-full text-right mt-2">
                     <button className="px-3 rounded-sm py-1 bg-red-600 text-white font-medium" type="button" onClick={() => {handelRemove(index)}}>
-                      DELETE
+                      X
                     </button>
                   </div>
                 )

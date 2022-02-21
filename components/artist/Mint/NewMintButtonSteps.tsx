@@ -1,7 +1,7 @@
 import { FieldValues, UseFormTrigger } from 'react-hook-form'
 import { useWizard } from 'react-use-wizard'
 
-const NewQuoteButtonSteps = ({
+const NewMintButtonSteps = ({
   trigger,
 }: {
   trigger: UseFormTrigger<FieldValues>
@@ -45,4 +45,4 @@ const NewQuoteButtonSteps = ({
   )
 }
 
-export default NewQuoteButtonSteps
+export default NewMintButtonSteps

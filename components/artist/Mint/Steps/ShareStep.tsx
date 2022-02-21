@@ -1,7 +1,7 @@
 import { HiOutlineSelector } from 'react-icons/hi'
 import { useWizard } from 'react-use-wizard'
 import { StepProps } from '../NewQuoteTypes'
-import QuoteSteps from '../NewQuoteNumberSteps'
+import QuoteSteps from '../NewMintNumberSteps'
 import { useAppContext } from '../../../../context/state'
 
 const ShareStep = ({ register, trigger }: StepProps) => {

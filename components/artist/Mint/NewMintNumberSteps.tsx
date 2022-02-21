@@ -1,6 +1,6 @@
 import { useWizard } from 'react-use-wizard'
 
-const NewQuoteNumberSteps = () => {
+const NewMintNumberSteps = () => {
   const { activeStep } = useWizard()
 
   return (
@@ -23,4 +23,4 @@ const NewQuoteNumberSteps = () => {
   )
 }
 
-export default NewQuoteNumberSteps
+export default NewMintNumberSteps

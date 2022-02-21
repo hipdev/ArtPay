@@ -67,20 +67,16 @@ const NewQuote = () => {
       }
 
       console.log(values)
-
-      //.eq('address->postcode', 90210)
     })(); 
 // sharedState.job.share_code
     //sessState.sharedState.job = values;
     //console.log(">> Code:"+ sessState.sharedState.job.share_code); 
     console.log(">> Data.title title should have a value:"+ values.title); // IT WORKED!
     console.log('Data now:'+ values);
-//TODO:DB: Append row in JOB table from sessionState.job
     console.log(sessionState.job);
-    //TODO:DB: Append row in JOB table from sessionState.job
     
     //console.log(">> Data.title title should have a value:"+ data.title); // IT WORKED!
-    //TODO:DB: Append row in JOB table from sessionState.job
+
 
   }
 

@@ -10,27 +10,31 @@ import { initNear, signout } from '../../context/utils'
 import { useRouter } from 'next/router';
 
 const Main = styled("div", {
-  width: '9em',
-  position: 'fixed',
-  top: 10,
+  width: '8em',
+  position: 'sticky',
   right: 0,
 });
 
 const DropDownContainer = styled("div", {
-  width: '9em',
-  margin: '0 auto',
+  width: '10em',
+  margin: '0 auto 5',
   right:0,
 });
 
 const DropDownHeader = styled("div", {
-  top: 10,
-  'margin-bottom': '0.8em',
+  'margin-top': 2,
+  'margin-bottom': '0.0em',
   background: '#ffffff',
 });
 
-const DropDownListContainer = styled("div");
+const DropDownListContainer = styled("div",
+{
+  position: 'fixed',
+
+});
 
 const DropDownList = styled("ul", {
+  width: '9em',
   padding: 0,
   margin: 0,
   'padding-left': '1em',
@@ -104,27 +108,33 @@ const DropDownMenu = ({props}) =>
       /* reload UI with correct dashboard */
     };
 
+    var shortName = sessionState.wallet && sessionState.wallet.getAccountId();
+    if (shortName) { 
+      shortName = shortName.toString().replace('.testnet', '');
+      shortName = shortName.toString().replace('.near', '');
+    }
+
     return (
     <Main>
       <DropDownContainer>
           <DropDownHeader onClick={toggling}>
-          <button className="flex items-center gap-1">
-            <span className="text-sm font-medium">{(sessionState.wallet && sessionState.wallet.getAccountId())}</span>
-            {/* <span className="mx-1">
-              <Image
-                src="/images/julian.jpg"
-                width={32}
-                height={32}
-                className="rounded-full"
-                alt="User image"
-              />
-            </span> */}
-            <span>
-              {selectedOption == "A" ? <BsPalette/> : <BsPiggyBank/> }
-            </span>
-            <span>
-              <BsChevronDown className="text-sm" />
-            </span>
+            <button className="flex items-center gap-1 ">
+              <span className="text-sm font-medium">{(shortName)}</span>
+              {/* <span className="mx-1">
+                <Image
+                  src="/images/julian.jpg"
+                  width={32}
+                  height={32}
+                  className="rounded-full"
+                  alt="User image"
+                />
+              </span> */}
+              <span>
+                {selectedOption == "A" ? <BsPalette/> : <BsPiggyBank/> }
+              </span>
+              <span>
+                <BsChevronDown className="text-sm" />
+              </span>
             </button>
           </DropDownHeader>
         {isOpen && (
@@ -135,7 +145,12 @@ const DropDownMenu = ({props}) =>
               <ListItem onClick={onOptionClicked('')} >Switch mode</ListItem>
               {options.map(option => (
                 <ListOption onClick={onOptionClicked(option)} key={Math.random()}>
-                  {option == "A" ? <BsPalette/> : <BsPiggyBank/> }
+                  <span className='flex'>
+                  &nbsp;&nbsp;
+                    {option == "A" ? 'Artist' : 'Client' }&nbsp;
+                    {option == "A" ? <BsPalette/> : <BsPiggyBank/> }
+                   
+                  </span>
                 </ListOption>
               ))}
               <ListItem onClick={() => { signout(sessionState.wallet); router.push("/");}} >Sign Out</ListItem>

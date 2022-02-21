@@ -1,7 +1,7 @@
 import { HiOutlineSelector } from 'react-icons/hi'
 import { useWizard } from 'react-use-wizard'
 import { StepProps } from '../NewQuoteTypes'
-import QuoteSteps from '../NewQuoteNumberSteps'
+import MintSteps from '../NewMintNumberSteps'
 import { AiOutlineLock } from 'react-icons/ai'
 import { useAppContext } from '../../../../context/state'
 
@@ -14,7 +14,7 @@ const ThirdStepQuote = ({ register }: StepProps) => {
 
   return (
     <div>
-      <QuoteSteps />
+      <MintSteps />
       <h3 className="text-xl font-medium mb-5">Price & costs</h3>
       
       <label className="flex flex-col mb-5">

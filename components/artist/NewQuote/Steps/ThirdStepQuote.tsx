@@ -26,15 +26,15 @@ const ThirdStepQuote = ({ register }: StepProps) => {
         <HiOutlineSelector className="absolute right-2 bottom-2 text-2xl" />
       </div>
 
-      <label className="flex flex-col mb-5">
+      {/*<label className="flex flex-col mb-5">
         <span className="font-medium mb-2">Contractor</span>
         <input
-          {...register('contractor', { required: true })}
+          {...register('contractor', { required: false })}
           type="text"
           onChange={e => setContractor(e.target.value)}
           className="shadow-sm shadow-gray-300 border-gray-100 px-4 py-2 rounded-sm"
         />
-      </label>
+      </label>*/}
       
 
       <label className="flex items-center justify-between mb-5 gap-2 mt-3">
@@ -42,7 +42,7 @@ const ThirdStepQuote = ({ register }: StepProps) => {
         <div className="relative w-5/12">
           <input
             className="shadow-sm shadow-gray-300 border-gray-100 px-4 py-2 rounded-sm bg-white w-full text-right"
-            placeholder="2.500"
+            placeholder="2,500"
           />
         </div>
       </label>

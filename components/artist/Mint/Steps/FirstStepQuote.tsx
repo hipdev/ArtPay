@@ -1,7 +1,7 @@
 import { HiOutlineSelector } from 'react-icons/hi'
-import NewQuoteButtonSteps from '../NewQuoteButtonSteps'
+import NewMintButtonSteps from '../NewMintButtonSteps'
 import { StepProps } from '../NewQuoteTypes'
-import QuoteSteps from '../NewQuoteNumberSteps'
+import MintSteps from '../NewMintNumberSteps'
 import { useAppContext } from '../../../../context/state'
 import { useForm } from 'react-hook-form'
 import { IoSettingsOutline } from 'react-icons/io5'
@@ -15,7 +15,7 @@ const FirstStepQuote = ({ register, trigger }: StepProps) => {
 
   return (
     <div>
-      <QuoteSteps />
+      <MintSteps />
 
       <h3 className="text-xl font-medium mb-5">What are you making?</h3>
 
@@ -39,7 +39,7 @@ const FirstStepQuote = ({ register, trigger }: StepProps) => {
         />
       </label>
       
-      <NewQuoteButtonSteps trigger={trigger} />
+      <NewMintButtonSteps trigger={trigger} />
     </div>
   )
 }

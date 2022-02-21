@@ -52,7 +52,7 @@ const ShareStep = ({ register, trigger, job }: StepProps) => {
         </button>
 
         <button type="submit" className="px-3 rounded-sm py-1 bg-primary text-white font-medium">
-          Mint!
+          Done!
         </button>
       </div>
     </div>

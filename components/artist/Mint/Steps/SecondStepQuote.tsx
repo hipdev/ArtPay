@@ -2,9 +2,9 @@ import Image from 'next/image'
 import { HiOutlineSelector } from 'react-icons/hi'
 import { GoCheck } from 'react-icons/go'
 import { legalData } from '../legal-data'
-import NewQuoteButtonSteps from '../NewQuoteButtonSteps'
+import NewMintButtonSteps from '../NewMintButtonSteps'
 import { StepProps } from '../NewQuoteTypes'
-import QuoteSteps from '../NewQuoteNumberSteps'
+import MintSteps from '../NewMintNumberSteps'
 import { useState } from 'react'
 import { StyledSwitch, StyledThumb } from './SecondStepQuoteStyles'
 import { useAppContext } from '../../../../context/state'
@@ -31,7 +31,7 @@ const SecondStepQuote = ({ register, trigger, watch }: StepProps) => {
 
   return (
     <div>
-      <QuoteSteps />
+      <MintSteps />
 
       <h3 className="text-xl font-medium mb-5">Who owns the rights?</h3>
 
@@ -146,7 +146,7 @@ const SecondStepQuote = ({ register, trigger, watch }: StepProps) => {
         </div>
       )}
 
-      <NewQuoteButtonSteps trigger={trigger} />
+      <NewMintButtonSteps trigger={trigger} />
     </div>
   )
 }
